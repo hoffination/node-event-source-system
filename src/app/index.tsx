@@ -1,20 +1,18 @@
 import React = require('react')
-import ReactDOMServer = require('react-dom/server');
-import { renderToString } from 'react-dom/server';
+import { renderToString } from 'react-dom/server'
 
-class App extends React.Component<any, any> {
-	constructor(public props: any) {
-		super(props);
-	}
+import App from './App'
 
-	render() {
-		return (
-			<div className="fox">
-				<h5>{ this.props.name }</h5>
-				<p>This page is all about {this.props.name}.</p>
-			</div>
-		)
-	}
+const renderApp = (state: any) => {
+  const html = renderToString(React.createFactory(App)({state, name: 'FRED'}))
+  return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+    </head>
+    <body>${html}</body>
+    </html>
+  `
 }
 
-export default renderToString(React.createFactory(App)({name: 'Fred'}))
+export { renderApp }

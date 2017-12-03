@@ -1,13 +1,21 @@
 import * as express from 'express'
 import { Store } from 'redux'
+import Joi = require('joi');
 
 import FileSystemLogger from './logging/filesystem'
-import { reducer } from './core/reducers/meta.reducer'
+import { reducer, ADD_MEDIA_ACTION } from './core/reducers/meta.reducer'
 import AppAction from './core/interfaces/appAction'
-import html from './app/index';
+import { renderApp } from './app/index'
 
 export default class RootRoute {
   private route: express.Router
+
+  private postMediaJoi = Joi.object().keys({
+    author: Joi.string().required(),
+    coverUrl: Joi.string(),
+    title: Joi.string().required(),
+    type: Joi.string().alphanum().required()
+  })
 
   constructor(store: Store<any>, logger: FileSystemLogger) {
     this.route = express.Router()
@@ -22,7 +30,19 @@ export default class RootRoute {
     })
 
     this.route.get('/home', (req, res) => {
-      return res.send(`<!DOCTYPE html><html><body>${html}</body></html>`)
+      return res.send(renderApp(store.getState()))
+    })
+
+    this.route.post('/media', (req, res) => {
+      Joi.validate(req.body, this.postMediaJoi, (err, value) => {
+        if (err) return res.status(400).send(err)
+        let action: AppAction = {
+          type: ADD_MEDIA_ACTION,
+          payload: {...value, timeFinished: Date.now()}
+        }
+        logger.saveLog(action)
+        return res.status(200).send(`Good job finishing ${value.title}! On to the next one...`)
+      })
     })
   }
 

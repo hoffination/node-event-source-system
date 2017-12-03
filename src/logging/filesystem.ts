@@ -13,7 +13,8 @@ export default class FileSystemLogger {
       if (err) return console.log(err)
       let logs = data.toString().split('\n')
       logs.forEach(log => {
-        this.store.dispatch(JSON.parse(log))
+        if (log.length > 0)
+          this.store.dispatch(JSON.parse(log))
       })
     })
     this.watchLog()
