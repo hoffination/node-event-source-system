@@ -1,6 +1,8 @@
+import AppAction from '../interfaces/appAction'
+
 const initialState = {requests: 0};
 
-module.exports = (state = initialState, action) => {
+const reducer = (state = initialState, action: AppAction) => {
   switch(action.type) {
     case '/':
       return {
@@ -11,3 +13,5 @@ module.exports = (state = initialState, action) => {
       return state;
   }
 }
+
+export { reducer };
