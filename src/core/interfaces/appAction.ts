@@ -3,4 +3,4 @@ interface AppAction {
   payload?: any
 }
 
-export default AppAction;
+export default AppAction

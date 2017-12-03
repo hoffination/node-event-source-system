@@ -3,15 +3,15 @@ import { createStore } from 'redux'
 import FileSystemLogger from './logging/filesystem'
 
 import RootRoute from './root'
-import { reducer } from './core/reducers/meta.reducer';
+import { reducer } from './core/reducers/meta.reducer'
 
 const app = express()
-const store = createStore(reducer);
-const logger = new FileSystemLogger(store);
+const store = createStore(reducer)
+const logger = new FileSystemLogger(store)
 
-logger.restoreLogs();
+logger.restoreLogs()
 
 // regester endpoints
-app.use(new RootRoute(store, logger).getRouter());
+app.use(new RootRoute(store, logger).getRouter())
 
-export default app;
+export default app

@@ -1,6 +1,6 @@
 import AppAction from '../interfaces/appAction'
 
-const initialState = {requests: 0};
+const initialState = {requests: 0}
 
 const reducer = (state = initialState, action: AppAction) => {
   switch(action.type) {
@@ -10,8 +10,8 @@ const reducer = (state = initialState, action: AppAction) => {
         requests: state.requests + 1
       }
     default:
-      return state;
+      return state
   }
 }
 
-export { reducer };
+export { reducer }
