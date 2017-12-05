@@ -16,7 +16,9 @@
     "@types/react-dom": "^16.0.3",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
+    "intl-dt": "^0.1.0",
     "joi": "^13.0.2",
+    "ramda": "^0.25.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "redux": "^3.7.2"
@@ -24,6 +26,7 @@
   "devDependencies": {
     "@types/node": "^8.0.53",
     "ts-node": "^3.3.0",
+    "tslint": "^5.8.0",
     "typescript": "^2.6.2"
   }
 }

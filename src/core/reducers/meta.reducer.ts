@@ -1,5 +1,8 @@
 import AppAction from '../interfaces/appAction'
 import AppState from '../interfaces/appState';
+const R = require('ramda');
+
+const descTimeSort = (a: any, b: any) => b.timeFinished - a.timeFinished;
 
 const initialState: AppState = {
   requests: 0,
@@ -18,10 +21,7 @@ export const reducer = (state: AppState = initialState, action: AppAction) => {
     case ADD_MEDIA_ACTION:
       return {
         ...state,
-        media: [
-          ...state.media,
-          action.payload
-        ]
+        media: R.sort(descTimeSort, R.append(action.payload, state.media))
       }
     default:
       return state

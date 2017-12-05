@@ -14,7 +14,8 @@ export default class RootRoute {
     author: Joi.string().required(),
     coverUrl: Joi.string(),
     title: Joi.string().required(),
-    type: Joi.string().alphanum().required()
+    type: Joi.string().alphanum().required(),
+    timeFinished: Joi.number()
   })
 
   constructor(store: Store<any>, logger: FileSystemLogger) {
@@ -38,7 +39,7 @@ export default class RootRoute {
         if (err) return res.status(400).send(err)
         let action: AppAction = {
           type: ADD_MEDIA_ACTION,
-          payload: {...value, timeFinished: Date.now()}
+          payload: {...value, timeFinished: value.timeFinished || Date.now()}
         }
         logger.saveLog(action)
         return res.status(200).send(`Good job finishing ${value.title}! On to the next one...`)
