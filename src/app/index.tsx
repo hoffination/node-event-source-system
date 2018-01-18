@@ -10,6 +10,7 @@ const renderApp = (state: any) => {
     <html>
     <head>
       <title>Server rendered media list</title>
+      <link rel="preconnect" href="https://images-na.ssl-images-amazon.com">
       <link rel="stylesheet" href="https://unpkg.com/tachyons@4.9.0/css/tachyons.min.css"/>
       <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
       <style>body {font-family:"Varela Round",sans-serif;}.media-size { height: 10rem; width: 10rem; }</style>

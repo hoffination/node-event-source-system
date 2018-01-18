@@ -1,10 +1,11 @@
 import * as express from 'express'
 import { createStore } from 'redux'
 import FileSystemLogger from './logging/filesystem'
-import bodyParser = require('body-parser');
+import * as bodyParser from 'body-parser';
 
 import RootRoute from './root'
 import { reducer } from './core/reducers/meta.reducer'
+import TestRoute from './test';
 
 const app = express()
 const store = createStore(reducer)
@@ -17,7 +18,8 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 app.set('json spaces', 2)
 
-// regester endpoints
+// register endpoints
 app.use(new RootRoute(store, logger).getRouter())
+app.use(new TestRoute().getRouter())
 
 export default app
